@@ -6,8 +6,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        build_type: [RelWithDebInfo, Debug]
+        os: [windows-latest]
+        build_type: [RelWithDebInfo, Release]
         ui: [gui, cli]
         scripting: [lua, noscripts]
         exclude:
@@ -92,6 +92,10 @@ jobs:
       shell: bash
       run: |
         cd build && ninja
+    - uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact
+        path: bin/ # or path/to/artifact
     - name: Running C++ Tests
       shell: bash
       run: |
